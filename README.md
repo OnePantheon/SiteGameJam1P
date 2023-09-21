@@ -18,7 +18,6 @@ The site web for future gamejam of the One Panthéon association
     - [ ] Timer restant
     - [ ] Présentation de la gamejam avec le sujet
     - [ ] Liste des participants
-    - [ ] 
   - après
     - [ ] Présentation de la gamejam avec le sujet
     - [ ] Résultats (classement, prix, etc.)
@@ -63,6 +62,7 @@ The site web for future gamejam of the One Panthéon association
 - [Abdel-waheb](https://github.com/L4KK4S)
 - [Dimitri](https://github.com/goldor8)
 - [Vincent](https://github.com/Fefoler01)
+- [Valentin](https://github.com/Teravla)
 
 ## Liens utiles
 - [Svelte](https://svelte.dev/)
