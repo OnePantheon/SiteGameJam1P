@@ -66,3 +66,7 @@ The site web for future gamejam of the One Panthéon association
 
 ## Liens utiles
 - [Svelte](https://svelte.dev/)
+
+## Liens utiles [design]
+- [Maquette](https://www.figma.com/file/7YQBeACmTDd5v3JI6q0d9g/Maquette-GameJam?type=design&node-id=0%3A1&mode=design&t=I1gsknrsC2BRi6p0-1)
+- [Palette](https://coolors.co/d7fff1-177e89-84c318-031d3a-8cd790)
