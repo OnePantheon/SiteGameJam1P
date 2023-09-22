@@ -2,8 +2,11 @@
     import "../app.css";
 </script>
 
-<nav class="w-full bg-red-600 h-[5vh] flex items-center justify-center text-xl drop-shadow-md menu">
+
+<nav class="w-full bg-gradient-to-bl from-red-600 to-red-700 h-[8vh] flex items-center justify-center text-2xl menu drop-shadow-md">
     <a href="/">Home</a>
 </nav>
 
-<slot/>
+<div id="content" class="min-h-[92vh]">
+    <slot/>
+</div>
