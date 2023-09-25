@@ -1,8 +1,27 @@
 # SiteGameJam1P
 The site web for future gamejam of the One Panthéon association
 
-## Installation
+## Installation et lancement
+Pour les développeurs, il faut installer [Node.js](https://nodejs.org/en/) et [Git](https://git-scm.com/).
+Puis, il faut cloner le dépôt :
+```bash
+git clone
+```
+Placer vous dans le dossier GJ1P :
+```bash
+cd GJ1P
+```
+Ensuite, il faut installer les dépendances :
+```bash
+npm install
+```
+Enfin, il faut lancer le serveur de développement : (le `-- --open` permet d'ouvrir le site dans le navigateur)
+```bash
+npm run dev -- --open
+```
+Le site est alors accessible à l'adresse [http://127.0.0.1:5173/](http://127.0.0.1:5173/).
 
+Attention à bien garder à jour les dépendances avec `npm i` dans le dossier GJ1P et à bien commit les changements avec `git commit`.
 
 ## Todo
 - [ ] Page d'accueil :
