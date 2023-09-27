@@ -25,8 +25,9 @@ Attention à bien garder à jour les dépendances avec `npm i` dans le dossier G
 
 ## Todo
 - [ ] Page d'accueil :
-  - [ ] Présentation générale
+  - [x] Présentation générale
   - [ ] Actualités (dernières news/gamejams avec lien vers la page de la gamejam)
+  - [ ] Frise chronologique des gamejams
 - [ ] Pages par GameJam :
   - avant
     - [ ] Timer avant la gamejam

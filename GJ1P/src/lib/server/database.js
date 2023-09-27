@@ -1,4 +1,4 @@
-export const fakeGameJams = [
+const fakeGameJams = [
     {
         name: "Ring jam",
         description: "A gamejame where the main theme was rings",
@@ -12,3 +12,10 @@ export const fakeGameJams = [
         description: "A gamejame where the main theme was jam",
     }
 ]
+
+function getCurrent(){
+    console.log(fakeGameJams[0].name)
+    return fakeGameJams[0];
+}
+
+export default {fakeGameJams, getCurrent}

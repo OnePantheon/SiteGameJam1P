@@ -2,13 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
-.menu > a:hover{
-    background-color: theme('colors.red.500');
+
+.menu > a{
     height: 100%;
     padding: 10px;
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+
+.menu > a:hover{
+    background-color: theme('colors.red.500');   
 }
 
 .whiteShadow{

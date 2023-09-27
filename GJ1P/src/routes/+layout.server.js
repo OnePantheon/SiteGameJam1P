@@ -1,8 +1,9 @@
-import {fakeGameJams} from '$lib/server/database.js';
+import database from '$lib/server/database.js';
 
 export function load({ params }) {
     return {
-        gameJams: fakeGameJams
+        current: database.getCurrent(),
+        gameJams: database.fakeGameJams
     }
 
 }

@@ -9,10 +9,10 @@
     </div>
 
     <div class="bg-slate-600 pt-16">
-        <h2 class="text-center text-6xl text-red-600 drop-shadow-md"><strong>Nos derniers évènements</strong></h2>
+        <h2 class="text-center text-6xl text-white drop-shadow-md"><strong>Nos derniers évènements</strong></h2>
         <div class="flex justify-center">
             {#each data.gameJams as gamejam, i}
-                <div class="w-1/2 bg-slate-700 rounded-xl mt-10 mb-10 mr-10 ml-10 drop-shadow-md">
+                <a href="/gamejam/{gamejam.name}" class="w-1/2 bg-slate-700 rounded-xl mt-10 mb-10 mr-10 ml-10 drop-shadow-md">
                     <div class="flex justify-center">
                         <img src="https://picsum.photos/500/300?seed={i}" alt="{i}" class="rounded-xl mt-10 mb-6 mr-10 ml-10 drop-shadow-md">
                     </div>
@@ -22,7 +22,7 @@
                     <div class="flex justify-center p-2">
                         <p class="text-xl text-white">{gamejam.description}</p>
                     </div>
-                </div>
+                </a>
             {/each}
         </div>
     </div>
