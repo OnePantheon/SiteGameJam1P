@@ -29,14 +29,14 @@
     two forms, one for login, one for register. We show the one corresponding to the selected button
 -->
 
-<Modal bind:showModal>
-	<h2 slot="header" style="display: flex; justify-content: space-around; align-items: center;">
+<Modal bind:showModal >
+	<h2 slot="headerModal" class="headerModal">
 		<button class:selected={isLoginSelected} on:click={() => toggleLogin("login")} id="login">Login</button>
         <hr style="height: 20px; border: 1px solid #ccc; margin: 0;">
         <button class:selected={!isLoginSelected} on:click={() => toggleLogin("register")} id="register">Register</button>
 	</h2>
 
-    <div class="modal-content">
+    <div slot="bodyModal" class="modal-content">
         {#if isLoginSelected}
             <form action="/login" method="POST">
                 <div>
@@ -52,16 +52,26 @@
         {:else}
             <form action="/register" method="POST">
                 <div>
-                <label for="username">Username</label>
-                <input type="text" name="username" id="username" required>
+                    <label for="username">Username</label>
+                    <input type="text" name="username" id="username" required>
+                </div>
+
+                <div>
+                    <label for="username">Name</label>
+                    <input type="text" name="username" id="username" required>
+                </div>
+                <div  >
+                    <label for="mail" >E-mail</label>
+                    <input id="mail" name="mail" type="text" required   class="text-black" />
+                </div>
+        
+                <div>                
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password" required>
                 </div>
                 <div>
-                <label for="password">Password</label>
-                <input type="password" name="password" id="password" required>
-                </div>
-                <div>
-                <label for="password2">Repeat Password</label>
-                <input type="password" name="password2" id="password2" required>
+                    <label for="password2">Confirm Password</label>
+                    <input type="password" name="password2" id="password2" required>
                 </div>
                 <button type="submit">Register</button>
             </form>
@@ -71,8 +81,17 @@
 </Modal>
 
 <style>
+  
     .selected {
         font-weight: bold;
+    }
+
+    .headerModal{
+        display: flex; 
+        justify-content: space-around;
+        align-items: center;
+        padding: 0.5em;
+        padding-bottom: 0em;
     }
 
     .modal-content > form {
@@ -83,12 +102,18 @@
     .modal-content > form > div {
         display: flex;
         justify-content: space-between;
+        text-align: center;
+       
+        padding: 0.5em;
     }
 
     .modal-content > form > div > input {
-        border: 1px solid #ccc;
+        border: 1.5px solid #ccc;
         border-radius: 5px;
         margin-left: 10px;
     }
-
+   
 </style>
+
+
+                 
