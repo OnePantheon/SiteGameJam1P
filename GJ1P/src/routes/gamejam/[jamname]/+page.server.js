@@ -1,7 +1,8 @@
-import database from "../../../lib/server/database"
+import database from "$lib/server/database"
 
-export function load({ params }) {
+export async function load({ params }) {
+    console.log(await database.getGamejamByName(params.jamname))
     return{
-        gamejam: database.fakeGameJams.find((jam) => jam.name === params.jamname)
+        gamejam: await database.getGamejamByName(params.jamname)
     };
 }

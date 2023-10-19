@@ -14,12 +14,14 @@ model Gamejam{
   id Int @id @default(autoincrement())
   name String
   description String
-  startTime String
-  endTime String
+  startTime DateTime
+  endTime DateTime
 }
 
 model User{
   id Int @id @default(autoincrement())
   username String
   email String @unique
+  passwordHash String
+  profilePicture String
 }

@@ -1,26 +1,33 @@
-const fakeGameJams = [
-    {
-        name: "Ring jam",
-        description: "A gamejame where the main theme was rings",
-        startTime: "2023-09-27T16:00:00.000Z",
-        endTime: "2023-09-27T18:00:00.000Z"
-    },
-    {
-        name: "Crazy jam",
-        description: "A gamejame where the main theme was crazy",
-        startTime: "2024-09-27T16:00:00.000Z",
-        endTime: "2024-09-27T18:00:00.000Z"
-    },
-    {
-        name: "Jam jam",
-        description: "A gamejame where the main theme was jam",
-        startTime: "2022-09-27T16:00:00.000Z",
-        endTime: "2022-09-27T18:00:00.000Z",
-    }
-]
+import prisma from '$lib/prisma';
 
-function getCurrent(){
-    return fakeGameJams[0];
+async function getCurrent(){
+    let allGamejams = await getAllGamejams();
+
+    console.log(allGamejams);
+    
+    let runningGamejams = allGamejams.filter(gamejam => {
+        return gamejam.startTime < Date.now() && gamejam.endTime > Date.now();
+    });
+    
+    return runningGamejams[0];
 }
 
-export default {fakeGameJams, getCurrent}
+async function getAllGamejams(){
+    return await prisma.gamejam.findMany();
+}
+
+async function getGamejamByName(name){
+    let result = await prisma.gamejam.findMany({
+        where: {
+            name
+        }
+    });
+
+    if(result.length >= 1){
+        return result[0];
+    }
+
+    return null;
+}
+
+export default {getCurrent, getGamejamByName, getAllGamejams}

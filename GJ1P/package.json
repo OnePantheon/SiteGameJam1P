@@ -29,9 +29,10 @@
 	},
 	"type": "module",
 	"prisma": {
-		"seed": "ts-node prisma/seed.ts"
+		"seed": "tsx prisma/seed.ts"
 	},
 	"dependencies": {
-		"@prisma/client": "^5.4.2"
+		"@prisma/client": "^5.4.2",
+		"tsx": "^3.13.0"
 	}
 }

@@ -1,8 +1,8 @@
 import database from '$lib/server/database.js';
 
-export function load({ params }) {
+export async function load({ params }) {
     return {
-        gameJams: database.fakeGameJams
+        gameJams: await database.getAllGamejams()
     }
 
 }
