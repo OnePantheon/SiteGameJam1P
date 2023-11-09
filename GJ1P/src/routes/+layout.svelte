@@ -9,6 +9,24 @@
     function toggleLogin(logreg) {
         isLoginSelected = logreg === "login";
     }
+
+    async function login(){
+        const username = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
+        const response = await fetch("/api/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({username, password})
+        });
+        if(response.ok){
+            showModal = false;
+        } else {
+            alert("Wrong username or password");
+            console.log(response)
+        }
+    }
 </script>
 
 
@@ -38,7 +56,7 @@
 
     <div slot="bodyModal" class="modal-content">
         {#if isLoginSelected}
-            <form action="/login" method="POST">
+            <form>
                 <div>
                 <label for="username">Username</label>
                 <input type="text" name="username" id="username" required>
@@ -47,7 +65,7 @@
                 <label for="password">Password</label>
                 <input type="password" name="password" id="password" required>
                 </div>
-                <button type="submit">Login</button>
+                <button type="button" on:click={() => login()}>Login</button>
             </form>
         {:else}
             <form action="/register" method="POST">
