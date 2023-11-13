@@ -30,4 +30,24 @@ async function getGamejamByName(name){
     return null;
 }
 
-export default {getCurrent, getGamejamByName, getAllGamejams}
+async function getUserByName(name){
+    let result = await prisma.user.findUnique({
+        where: {
+            username: name
+        }
+    });
+
+    return result;
+}
+
+async function createUser(username, email, password){
+    return await prisma.user.create({
+        data: {
+            username,
+            email,
+            passwordHash: password
+        }
+    });
+}
+
+export default {getCurrent, getGamejamByName, getAllGamejams, getUserByName, createUser}

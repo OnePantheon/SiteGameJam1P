@@ -1,7 +1,18 @@
 <script>
     import '../app.css';
     import Modal from './modal.svelte';
-    export let data;
+    import { applyAction, enhance } from '$app/forms';
+    import {page} from '$app/stores';
+
+    let form = undefined; // layout hack to get the form from the modal
+    function onSubmit() {
+        return async ({ result }) => {
+            await applyAction(result); // might not do anything here
+
+            if (result.type == 'success' || result.type == 'failure')
+                form = result.data;
+        }
+    }
 
     let showModal = false;
     let isLoginSelected = true;
@@ -10,23 +21,6 @@
         isLoginSelected = logreg === "login";
     }
 
-    async function login(){
-        const username = document.getElementById("username").value;
-        const password = document.getElementById("password").value;
-        const response = await fetch("/api/login", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({username, password})
-        });
-        if(response.ok){
-            showModal = false;
-        } else {
-            alert("Wrong username or password");
-            console.log(response)
-        }
-    }
 </script>
 
 
@@ -56,7 +50,7 @@
 
     <div slot="bodyModal" class="modal-content">
         {#if isLoginSelected}
-            <form>
+            <form use:enhance={onSubmit} method="post" action="/users?/login">
                 <div>
                 <label for="username">Username</label>
                 <input type="text" name="username" id="username" required>
@@ -65,22 +59,18 @@
                 <label for="password">Password</label>
                 <input type="password" name="password" id="password" required>
                 </div>
-                <button type="button" on:click={() => login()}>Login</button>
+                <button type="submit" >Login</button>
             </form>
         {:else}
-            <form action="/register" method="POST">
+            <form use:enhance method="post" action="/users?/register">
                 <div>
                     <label for="username">Username</label>
                     <input type="text" name="username" id="username" required>
                 </div>
 
-                <div>
-                    <label for="username">Name</label>
-                    <input type="text" name="username" id="username" required>
-                </div>
                 <div  >
-                    <label for="mail" >E-mail</label>
-                    <input id="mail" name="mail" type="text" required   class="text-black" />
+                    <label for="email" >E-mail</label>
+                    <input id="email" name="email" type="text" required   class="text-black" />
                 </div>
         
                 <div>                
@@ -94,6 +84,15 @@
                 <button type="submit">Register</button>
             </form>
         {/if}
+        <form use:enhance={onSubmit} method="post" action="/users?/isLogin">
+            <button type="submit">IsLogin</button>
+            {#if form?.error}
+                <small>{form?.message}</small>
+            {/if}
+            {#if form?.username}
+                <small>login as {form?.username}</small>
+            {/if}
+        </form>
     </div>
     
 </Modal>
