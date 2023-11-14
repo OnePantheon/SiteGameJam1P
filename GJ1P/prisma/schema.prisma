@@ -10,18 +10,29 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Gamejam{
-  id Int @id @default(autoincrement())
-  name String
-  description String
-  startTime DateTime
-  endTime DateTime
+model Gamejam {
+  id              Int               @id @default(autoincrement())
+  name            String
+  description     String
+  startTime       DateTime
+  endTime         DateTime
+  GamejamsOnUsers GamejamsOnUsers[]
 }
 
-model User{
-  id Int @id @default(autoincrement())
-  username String
-  email String @unique
-  passwordHash String
-  profilePicture String
+model User {
+  id              Int               @id @default(autoincrement())
+  username        String            @unique
+  email           String            @unique
+  passwordHash    String
+  profilePicture  String?
+  GamejamsOnUsers GamejamsOnUsers[]
+}
+
+model GamejamsOnUsers {
+  user      User    @relation(fields: [userId], references: [id])
+  userId    Int
+  gamejam   Gamejam @relation(fields: [gamejamId], references: [id])
+  gamejamId Int
+
+  @@id([userId, gamejamId])
 }
