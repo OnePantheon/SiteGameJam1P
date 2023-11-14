@@ -112,5 +112,15 @@ export const actions = {
 
         result.username = decodedToken.username;
         return result;
+    },
+
+    logout: async ({request, cookies}) => {
+        cookies.set("userToken", "", {
+            path: "/",
+            maxAge: 0,
+            httpOnly: true,
+            sameSite: "strict",
+            secure: true
+        })
     }
 }
