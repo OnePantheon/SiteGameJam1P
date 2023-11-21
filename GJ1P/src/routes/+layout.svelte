@@ -1,9 +1,11 @@
 <script>
+	import { goto, invalidate } from '$app/navigation';
     import '../app.css';
     import Modal from './modal.svelte';
     import { applyAction, enhance } from '$app/forms';
     import {page} from '$app/stores';
 
+    export let data;
     let form = undefined; // layout hack to get the form from the modal
     function onSubmit() {
         return async ({ result }) => {
@@ -11,8 +13,12 @@
 
             if (result.type == 'success' || result.type == 'failure')
                 form = result.data;
+
+            invalidate(window.location.pathname);
         }
     }
+
+    $: if(!form?.error) showModal = false;
 
     let showModal = false;
     let isLoginSelected = true;
@@ -20,7 +26,6 @@
     function toggleLogin(logreg) {
         isLoginSelected = logreg === "login";
     }
-
 </script>
 
 
@@ -29,7 +34,7 @@
         <a href="/">Home</a>
         </div>
     <div>
-        <button on:click={() => (showModal = true)}> User </button>
+        <button on:click={() => (showModal = true)}>{data.authedUser ? data.authedUser : "User"} </button>
     </div>
 </nav>
 
@@ -50,7 +55,7 @@
 
     <div slot="bodyModal" class="modal-content">
         {#if isLoginSelected}
-            <form use:enhance={onSubmit} method="post" action="/users?/login">
+            <form use:enhance={() => onSubmit()} method="post" action="/users?/login">
                 <div>
                 <label for="username">Username</label>
                 <input type="text" name="username" id="username" required>
@@ -62,7 +67,7 @@
                 <button type="submit" >Login</button>
             </form>
         {:else}
-            <form use:enhance method="post" action="/users?/register">
+            <form use:enhance={() => onSubmit()} method="post" action="/users?/register">
                 <div>
                     <label for="username">Username</label>
                     <input type="text" name="username" id="username" required>
@@ -84,14 +89,11 @@
                 <button type="submit">Register</button>
             </form>
         {/if}
-        <form use:enhance={onSubmit} method="post" action="/users?/isLogin">
-            <button type="submit">IsLogin</button>
-            {#if form?.error}
-                <small>{form?.message}</small>
-            {/if}
-            {#if form?.username}
-                <small>login as {form?.username}</small>
-            {/if}
+        {#if form?.error}
+            <p style="color: red;">{form.message}</p>
+        {/if}
+        <form use:enhance={() => {invalidate(window.location.pathname); showModal = false;}} method="post" action="/users?/logout">
+            <button type="submit">Logout</button>
         </form>
     </div>
     

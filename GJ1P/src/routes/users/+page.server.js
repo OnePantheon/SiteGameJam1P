@@ -11,10 +11,8 @@ export const actions = {
         const username = loginFormData.get("username");
         const password = loginFormData.get("password");
 
-        console.log(username);
         let user = await database.getUserByName(username);
 
-        console.log(user);
         let result = {
             error: false,
             message: "",
@@ -22,8 +20,6 @@ export const actions = {
         }
 
         if(user){
-            console.log(password);
-            console.log(user.passwordHash);
             if(await bcrypt.compare(password, user.passwordHash)){
                 result.username = user.username;
                 cookies.set("userToken", 
@@ -41,7 +37,6 @@ export const actions = {
         
         result.error = true;
         result.message = "Invalid username or password";
-        console.log(result);
         return result;
     },
 
